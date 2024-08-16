@@ -1,3 +1,6 @@
 <x-layout>
-    <div>Attendance</div>
+    <div class="container">
+       
+        attetndancee
+    </div>
 </x-layout>

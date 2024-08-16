@@ -42,7 +42,7 @@
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#updateModal_{{ $student->id }}">Edit</button>
                                 {{-- Modal Update --}}
-                                @include('Student.modals.update-modal', ['Student' => $student])
+                                @include('Teacher.Student.modals.update-modal', ['Student' => $student])
                                 <form method="POST" action="{{ route('student.destroy', $student->id) }}">
                                     @csrf
                                     @method('DELETE')
@@ -58,7 +58,7 @@
 
 
 
-    @extends('Student.modals.create-modal')
+    @extends('Teacher.Student.modals.create-modal')
 
 
     @push('script')

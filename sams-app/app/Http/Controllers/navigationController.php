@@ -10,10 +10,10 @@ class navigationController extends Controller
         return view('dashboard');
     }
     public function Student(){
-        return view('Student.student');
+        return view('Teacher.Student.student');
     }
     public function Subject(){
-        return view('subject');
+        return view('Teacher.Subject.index');
     }
     public function RFID(){
         return view('RFIDattendance');

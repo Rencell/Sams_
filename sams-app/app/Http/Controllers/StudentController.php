@@ -17,7 +17,7 @@ class StudentController extends Controller
     {
        $Student = Student::get();
 
-       return view('Student.index', compact('Student'));
+       return view('Teacher.Student.index', compact('Student'));
     }
 
     /**
@@ -35,24 +35,24 @@ class StudentController extends Controller
     {
        
         $request->validate([
-            'stud_id' => 'required|unique:students,id',
-            'rfid' => 'required|unique:students,rfid', 
-            'fname' => 'required|max:255',
-            'lname' => 'required|max:255',
-            'gender' => 'required|max:10',
-            's_email' => 'required|email|max:255|unique:students,email',
-            'birth' => 'required|date',
+            'stud_id'   => 'required|unique:students,id',
+            'rfid'      => 'required|unique:students,rfid', 
+            'fname'     => 'required|max:255',
+            'lname'     => 'required|max:255',
+            'gender'    => 'required|max:10',
+            's_email'   => 'required|email|max:255|unique:students,email',
+            'birth'     => 'required|date',
         ]);
 
 
         Student::create([
-            'id' => $request->stud_id,
-            'rfid' =>  $request->rfid,
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-            'gender' => $request->gender,
-            'email' => $request->s_email,
-            'birth_date' => $request->birth,
+            'id'            =>  $request->stud_id,
+            'rfid'          =>  $request->rfid,
+            'fname'         =>  $request->fname,
+            'lname'         =>  $request->lname,
+            'gender'        =>  $request->gender,
+            'email'         =>  $request->s_email,
+            'birth_date'    =>  $request->birth,
         ]);
 
         return redirect()->back();

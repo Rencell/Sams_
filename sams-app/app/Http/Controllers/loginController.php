@@ -46,7 +46,10 @@ class loginController extends Controller
         }
 
         $request->session()->regenerate();
-        return redirect('/dashboard');
+        if(Auth::user()->isAdmin == '0')
+            return redirect('/dashboard');
+        else
+            return redirect('/admin/student');
     }
 
     /**
