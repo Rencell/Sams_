@@ -16,7 +16,7 @@ class navigationController extends Controller
         return view('Teacher.Subject.index');
     }
     public function RFID(){
-        return view('RFIDattendance');
+       
     }
     public function Setting(){
         return view('setting');

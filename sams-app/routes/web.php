@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\rfidController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\navigationController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\subjectController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\attendanceController;
+use App\Http\Controllers\navigationController;
 
 Route::get('/', function () {})->middleware('auth');
 Route::get('/admin', function () {})->middleware('auth')->middleware('isAdmin');
@@ -21,9 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [navigationController::class, 'Dashboard']);
     //Route::get('/student', [navigationController::class, 'Student']);
    
-    Route::get('/rfid', [navigationController::class, 'RFID']);
+    //Route::get('/rfid', [navigationController::class, 'RFID']);
     Route::get('/setting', [navigationController::class, 'Setting']);
-    Route::get('/attendance', [navigationController::class, 'Attendance']);
+    //Route::get('/attendance', [navigationController::class, 'Attendance']);
 });
 
 Route::controller(adminController::class)->middleware('isAdmin')->group(function () {
@@ -51,4 +53,15 @@ Route::controller(subjectController::class)->middleware('auth')->group(function 
     Route::delete('student/{id}', 'destroy')->name('student.destroy');
 });
 
+Route::controller(rfidController::class)->middleware('auth')->group(function(){
+    Route::get('rfid', 'index')->name('rfid.index');
+    Route::post('rfid', 'store')->name('rfid.store');
+    Route::get('rfid-start/{subj_id}', 'create')->name('rfid.create');
+});
+
+Route::controller(attendanceController::class)->middleware('auth')->group(function(){
+    
+    Route::get('/attendance', 'index');
+    Route::post('rfid-start/{subj_id}', 'store')->name('attendance.store');
+});
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class subjectController extends Controller
@@ -31,6 +32,7 @@ class subjectController extends Controller
     }
 
     public function storeStudent(Request $request, $id){
+        Log::info($request);
         $selectedPeopleIds = $request->selected_people;
         $subject = Subject::find($id);
 

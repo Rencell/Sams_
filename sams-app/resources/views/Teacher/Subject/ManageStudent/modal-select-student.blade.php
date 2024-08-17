@@ -24,7 +24,7 @@
                             @foreach ($students as $student)
                                 <tr>
                                     <th scope="row">
-                                        <input type="checkbox" name="selected_people[]" value="{{ $student->id }}">
+                                        <input type="checkbox" name="selected_people[]" value="{{ str_pad($student->id, 10, '0', STR_PAD_LEFT) }}">
                                     </th>
                                     <td>{{ $student->Fname }}</td>
                                     <td>{{ $student->Lname }}</td>
