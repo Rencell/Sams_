@@ -18,7 +18,6 @@ class StudentFactory extends Factory
     {
         return [
             'id'         => fake()->unique()->randomNumber(8),
-            'rfid'       => fake()->unique()->randomNumber(5),
             'Fname'      => fake()->unique()->firstName(),
             'Lname'      => fake()->unique()->lastName(),
             'email'      => fake()->unique()->email(),

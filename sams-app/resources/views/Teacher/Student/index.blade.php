@@ -22,8 +22,7 @@
         <table id="exampletable" class="table display nowrap" style="width:100%">
             <thead class="table-light">
                 <tr>
-                    <th scope="col">Stud No.</th>
-                    <th scope="col">RFID</th>
+                    <th scope="col" style="text-align: left">Stud No.</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Actions</th>
@@ -32,21 +31,22 @@
             <tbody>
                 @foreach ($Student as $student)
                     <tr>
-                        <td>{{ $student->id }}</td>
-                        <td>{{ $student->rfid }}</td>
+                        <td style="text-align: left">{{ $student->id }}</td>
                         <td>{{ $student->Fname }}</td>
                         <td>{{ $student->Lname }}</td>
 
                         <td>
                             <div class="d-flex gap-2 align-items-center">
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#updateModal_{{ $student->id }}">Edit</button>
+                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal_{{ $student->id }}"><i
+                                        class="bi bi-pencil"></i></button>
                                 {{-- Modal Update --}}
                                 @include('Teacher.Student.modals.update-modal', ['Student' => $student])
                                 <form method="POST" action="{{ route('student.destroy', $student->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash-fill"></i></button>
                                 </form>
                             </div>
                         </td>
@@ -66,6 +66,8 @@
             $(document).ready(function() {
 
                 new DataTable('#exampletable', {
+
+                    ordering: false,
                     layout: {
                         topStart: {
                             buttons: [{
@@ -78,13 +80,14 @@
                                 {
                                     extend: 'excel',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: ':visible',
+                                        columns: [0, 1, 2]
                                     }
                                 },
                                 {
                                     extend: 'pdf',
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3]
+                                        columns: [0, 1, 2]
                                     }
                                 }
                             ]
@@ -127,18 +130,26 @@
 
                 let inputBuffer = '';
                 // automatically scans the rfid input
-                $('#rfid_create').on('keydown', function(event) {
+                $('#stud_id_create').on('keydown', function(event) {
 
-                    if (event.key === 'Enter'){
+                    if (event.key === 'Enter') {
                         event.preventDefault();
                         return;
                     }
+
+                    if (event.key === 'Backspace') {
+
+                        event.preventDefault();
+                        inputBuffer = inputBuffer.slice(0, -1);
+                        $(this).val(inputBuffer);
+                        return;
+                    }
+
+                    $('#stud_id_create').val(inputBuffer);
                     inputBuffer += event.key;
-                    $('#rfid_create').val(inputBuffer);
-                    
-                   
-                    
-                    
+
+
+
 
                 });
             });

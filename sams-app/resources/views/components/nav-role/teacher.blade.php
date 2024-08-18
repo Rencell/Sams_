@@ -21,7 +21,7 @@
         </x-slot>
     </x-nav>
 
-    <x-nav href="/attendance" :active="request()->is('attendance')">
+    <x-nav href="/attendance" :active="request()->is('attendance') || request()->is('attendance/*')">
         <i class="fs-4 bi-grid"></i>
         <x-slot name="label">
             Attendance

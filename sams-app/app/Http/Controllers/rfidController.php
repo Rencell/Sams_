@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use id;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
@@ -9,7 +10,7 @@ use App\Models\Subject;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class rfidController extends Controller
 {
@@ -18,7 +19,7 @@ class rfidController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('user')->get();
+        $subjects = Subject::where('teacher_id',Auth::id())->with('user')->get();
         return view('Teacher.RFID.index', compact('subjects'));
     }
 
@@ -27,8 +28,10 @@ class rfidController extends Controller
      */
     public function create($subj_id)
     {
-        
-        return view('Teacher.RFID.rfid-start', compact('subj_id'));
+        $attendanceRowExists = Attendance::latest()->first();
+
+        $attendanceId = $attendanceRowExists ? $attendanceRowExists->id : null;
+        return view('Teacher.RFID.rfid-start', compact('subj_id', 'attendanceId'));
     }
 
     /**

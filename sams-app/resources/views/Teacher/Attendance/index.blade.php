@@ -15,6 +15,7 @@
                     <tr>
                         <th scope="row">{{$attendance->subject->name}}</th>
                         <td>{{$attendance->date_attendance}}</td>
+                        <td><a href="{{ route('attendance.index', $attendance->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></a></td>
                     </tr>
                 @endforeach
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
     {{-- Bootstrap --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
@@ -25,19 +26,34 @@
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.html5.min.js" defer></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js" defer></script>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.bootstrap5.css">
+    
     <title>@yield('title')</title>
+    
+    <style>
+        .dt-buttons .buttons-copy,
+        .dt-buttons .buttons-excel,
+        .dt-buttons .buttons-pdf {
+            font-size: 12px;
+            /* Adjust the font size as needed */
+            background-color: #2c3e50;
+        }
+    </style>
+
+    @yield('style')
 </head>
+
 <body>
     @yield('content')
     {{-- <script src={{asset('js/bootstrap.min.js')}}></script> --}}
-    
-    
+
+
     @stack('script')
 
-    
+
 </body>
+
 </html>

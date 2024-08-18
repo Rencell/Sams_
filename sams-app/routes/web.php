@@ -62,6 +62,7 @@ Route::controller(rfidController::class)->middleware('auth')->group(function(){
 Route::controller(attendanceController::class)->middleware('auth')->group(function(){
     
     Route::get('/attendance', 'index');
-    Route::post('rfid-start/{subj_id}', 'store')->name('attendance.store');
+    Route::get('/attendance/{attendance_id}', 'manageSubject')->name('attendance.index');
+    Route::post('rfid-start/{attendance_id}', 'store')->name('attendance.store');
 });
 

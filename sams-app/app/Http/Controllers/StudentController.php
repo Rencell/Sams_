@@ -36,7 +36,6 @@ class StudentController extends Controller
        
         $request->validate([
             'stud_id'   => 'required|unique:students,id',
-            'rfid'      => 'required|unique:students,rfid', 
             'fname'     => 'required|max:255',
             'lname'     => 'required|max:255',
             'gender'    => 'required|max:10',
@@ -47,7 +46,6 @@ class StudentController extends Controller
 
         Student::create([
             'id'            =>  $request->stud_id,
-            'rfid'          =>  $request->rfid,
             'fname'         =>  $request->fname,
             'lname'         =>  $request->lname,
             'gender'        =>  $request->gender,
@@ -81,7 +79,6 @@ class StudentController extends Controller
     {
         $request->validate([
             'id' => 'required', Rule::unique('students', 'id')->ignore($id),
-            'rfid' => 'required', Rule::unique('students', 'rfid')->ignore($id),
             'fname' => 'required|max:255',
             'lname' => 'required|max:255',
             'gender' => 'required|max:10',

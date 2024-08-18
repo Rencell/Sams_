@@ -10,26 +10,15 @@
             {{-- Modal Body --}}
             <div class="modal-body">
                 {{-- problem here --}}
-                <form
-                    id="updateform_{{ $student->id }}">
+                <form id="updateform_{{ $student->id }}">
                     @csrf
-                    <div class="d-flex gap-2">
-                        <div class="mb-3 flex-grow-1">
-                            <label for="id" class="form-label">Student ID.</label>
-                            <input type="text" class="form-control" id="id_{{ $student->id }}"
-                                aria-describedby="emailHelp" name="id" value="{{ $student->id }}">
-                            <span class="invalid-feedback"></span>
-                        </div>
-
-
-                        <div class="mb-3 flex-grow-1">
-                            <label for="rfid" class="form-label">RFID: </label>
-                            <input type="text" class="form-control" id="rfid_{{ $student->id }}"
-                                aria-describedby="emailHelp" name="rfid" value="{{ $student->rfid }}">
-                            <span class="invalid-feedback"></span>
-                        </div>
-
+                    <div class="mb-3 flex-grow-1">
+                        <label for="id" class="form-label">Student ID.</label>
+                        <input type="text" class="form-control" id="id_{{ $student->id }}"
+                            aria-describedby="emailHelp" name="id" value="{{ $student->id }}">
+                        <span class="invalid-feedback"></span>
                     </div>
+
 
                     <div class="d-flex gap-2">
                         <div class="mb-3  flex-grow-1">
@@ -83,11 +72,11 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Close</button>
 
-                <button type="submit" class="btn btn-primary" onclick="updateForm({{$student->id}})">Save
+                <button type="submit" class="btn btn-primary" onclick="updateForm({{ $student->id }})">Save
                     changes</button>
 
             </div>
-            
+
 
         </div>
     </div>
@@ -95,12 +84,12 @@
 
 <script>
     function updateForm(student_id) {
-        
+
 
         var form = $('#updateform_' + student_id);
 
         $.ajax({
-            url: '/student/'+student_id,
+            url: '/student/' + student_id,
             type: 'PUT',
             data: form.serialize(),
             dataType: 'json',

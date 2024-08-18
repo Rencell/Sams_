@@ -20,7 +20,7 @@ class attendanceController extends Controller
        
         $teacherId = Auth::user()->id;
         
-        $attendances =  Attendance::whereHas('subject', function($query) use ($teacherId){
+        $attendances =  Attendance::with('subject')->whereHas('subject', function($query) use ($teacherId){
             $query->where('teacher_id', $teacherId);
         })->get();
 
@@ -30,6 +30,23 @@ class attendanceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function manageSubject($attendanceId){
+
+        // 1. Present students
+        $studentViews = Attendance::find($attendanceId)->student;
+        // 2. Id of present students
+        $student_presents = $studentViews->pluck('id');
+        // 3. Fetch all student's id
+        $fetch_student = Student::all()->pluck('id');
+        // 4. Subtract the id of present to all student
+        $filter_students = $fetch_student->diff($student_presents);
+        // 5. Fetch absent students
+        $student_absents = Student::whereIn('id', $filter_students)->get();
+
+
+        return view('Teacher.Attendance.ManageAttendance.index' , compact('studentViews', 'student_absents'));
+    }
+
     public function create()
     {
         //
@@ -42,29 +59,30 @@ class attendanceController extends Controller
     {
 
         
-        $AttendanceId = $request->subj_id;
+        $AttendanceId = $request->attendanceId;
         $studentId = $request->scan_text;
 
 
         $attend = Attendance::find($AttendanceId);
         if($attend->student()->where('student_id', $studentId)->exists()) {
             if($attend->date_attendance == now()->toDateString()){
-                Log::info("Fuck you");
+                return response()->json(['warning' => 'The student has already attendance']);
             }
-            
             
         }
 
         $attendance = Attendance::with('subject')->find($AttendanceId);
         $subjectId = $attendance->subject->id;
-
+        
+        
+        
         $StudentExists = Student::where('id', $studentId)
             ->whereHas('subject', function($query) use ($subjectId){
                 $query->where('id',$subjectId);
         })->first();
 
         if(!$StudentExists){
-            abort(404);
+            return response()->json(['danger' => 'The student is not belong from the subject']);
         }
         $attendance->student()->attach($studentId, [
             'subject_id' => $subjectId,
@@ -73,8 +91,12 @@ class attendanceController extends Controller
             'updated_at' => now(),
         ]);
 
-        
-        
+        $First_name = Student::find($studentId)->Fname;
+        $Last_name = Student::find($studentId)->Lname;
+
+        return response()->json(['success' => 'Attendance Complete',
+                                 'Fname'   => $First_name,
+                                 'Lname'   => $Last_name]);
         
 
     }
