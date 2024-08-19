@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Student;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class admin_studentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+       
        $Student = Student::get();
 
-       return view('Teacher.Student.index', compact('Student'));
+       return view('Admin.Student.index', compact('Student'));
     }
 
     /**
@@ -45,7 +47,7 @@ class StudentController extends Controller
 
 
         Student::create([
-            'id'            =>  ltrim($request->stud_id, '0'),
+            'id'            =>  $request->stud_id,
             'fname'         =>  $request->fname,
             'lname'         =>  $request->lname,
             'gender'        =>  $request->gender,

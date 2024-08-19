@@ -11,7 +11,7 @@
                         class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         @if (!Auth::guest())
                             @if (Auth::user()->isAdmin == '0')
-                                <span class="fs-6 mt-3 d-none d-sm-inline">Students Attendance Management System</span>
+                                <span class="fs-6 mt-3 d-none d-sm-inline">Student Attendance Management System</span>
                             @else
                                 <span class="fs-6 mt-3 d-none d-sm-inline">Admin</span>
                             @endif

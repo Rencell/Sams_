@@ -1,0 +1,29 @@
+.dashboard{
+    height: 25vh;
+    > .dashboard-word{
+        height: 100%;
+        width: fit-content;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        > div:nth-child(1){
+            font-size: small;
+        }
+        > div:nth-child(2){
+            font-size: 1.7em;
+        }
+        
+    }
+
+    > .photo{
+        height: 100%;
+        > .image-view{
+            height: 100%;
+            >img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

@@ -36,9 +36,9 @@
     </x-nav>
 
     <x-nav href="/setting" :active="request()->is('setting')">
-        <i class="fs-4 bi-gear"></i>
+        <i class="fs-4 bi-key"></i>
         <x-slot name="label">
-            Settings
+            Change Password
         </x-slot>
     </x-nav>
 

@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\rfidController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\studentController;
 use App\Http\Controllers\subjectController;
 use App\Http\Controllers\attendanceController;
 use App\Http\Controllers\navigationController;
+use App\Http\Controllers\admin\admin_studentController;
 
 Route::get('/', function () {})->middleware('auth');
 Route::get('/admin', function () {})->middleware('auth')->middleware('isAdmin');
@@ -29,7 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::controller(adminController::class)->middleware('isAdmin')->group(function () {
-    Route::get('admin/student', 'student');
+    //Route::get('admin/student', 'student');
     Route::get('admin/teacher', 'teacher');
     Route::get('admin/admins', 'admin');
 });
@@ -49,8 +50,9 @@ Route::controller(subjectController::class)->middleware('auth')->group(function 
     Route::get('subject/{id}', 'manageStudent')->name('subject.manageStudent');
     Route::post('subject/{id}', 'storeStudent')->name('subject.studentstore');
     Route::post('subject', 'store')->name('subject.store');
-    Route::put('student/{id}', 'update')->name('student.update');
-    Route::delete('student/{id}', 'destroy')->name('student.destroy');
+    Route::put('subject/{id}', 'update')->name('subject.update');
+    Route::delete('subject/{id}', 'destroy')->name('subject.destroy');
+    
 });
 
 Route::controller(rfidController::class)->middleware('auth')->group(function(){
@@ -64,5 +66,15 @@ Route::controller(attendanceController::class)->middleware('auth')->group(functi
     Route::get('/attendance', 'index');
     Route::get('/attendance/{attendance_id}', 'manageSubject')->name('attendance.index');
     Route::post('rfid-start/{attendance_id}', 'store')->name('attendance.store');
+
+    Route::post('Attendance/{attendance_id}/{student_id}', 'restoreAbsent')->name('attendance.restoreAbsent');
+    Route::delete('attendance/{subj_id}/{stud_id}', 'destroy')->name('attendance.destroystudent');
 });
 
+
+Route::prefix('admin')->namespace('App\Http\Controllers\admin')->middleware('isAdmin')->group(function () {
+
+    Route::controller(admin_studentController::class)->group(function () {
+        Route::get('student', 'index');
+    });
+});

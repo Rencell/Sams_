@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Student;
-use App\Models\Attendance;
 use App\Models\Subject;
+use App\Models\Attendance;
+use Database\Factories\StudentFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,19 +34,22 @@ class attendanceController extends Controller
      */
     public function manageSubject($attendanceId){
 
+        
         // 1. Present students
         $studentViews = Attendance::find($attendanceId)->student;
         // 2. Id of present students
         $student_presents = $studentViews->pluck('id');
-        // 3. Fetch all student's id
-        $fetch_student = Student::all()->pluck('id');
-        // 4. Subtract the id of present to all student
+        // 3. Id of subject
+        $subjectId = Attendance::find($attendanceId)->pluck('subject_id')->first();
+        // 4. Fetch all subject's students id
+        $fetch_student = Subject::with('student')->find($subjectId)->student->pluck('id');
+        // 5. Subtract the id of present to all student
         $filter_students = $fetch_student->diff($student_presents);
-        // 5. Fetch absent students
+        // 6. Fetch absent students
         $student_absents = Student::whereIn('id', $filter_students)->get();
 
 
-        return view('Teacher.Attendance.ManageAttendance.index' , compact('studentViews', 'student_absents'));
+        return view('Teacher.Attendance.ManageAttendance.index' , compact('studentViews', 'student_absents', 'attendanceId'));
     }
 
     public function create()
@@ -60,7 +65,17 @@ class attendanceController extends Controller
 
         
         $AttendanceId = $request->attendanceId;
-        $studentId = $request->scan_text;
+        $studentId = $request->input('scan_text');
+
+        return $this->storingAttendance($request, $AttendanceId, $studentId);
+    }
+
+    public function storingAttendance(Request $request, $AttendanceId, $studentId ){
+        $AttendanceId = $request->attendanceId;
+        $studentId = $request->input('scan_text');
+
+        Log::info($studentId);
+        $studentId = ltrim($studentId, '0');
 
 
         $attend = Attendance::find($AttendanceId);
@@ -97,10 +112,12 @@ class attendanceController extends Controller
         return response()->json(['success' => 'Attendance Complete',
                                  'Fname'   => $First_name,
                                  'Lname'   => $Last_name]);
-        
-
     }
 
+    public function restoreAbsent(Request $request, string $attendanceId, string $student_id){
+        $this->storingAttendance($request, $attendanceId, $student_id);
+        return redirect()->back();
+    }
     /**
      * Display the specified resource.
      */
@@ -128,8 +145,17 @@ class attendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $subj_id, string $stud_id)
     {
-        //
+        $id = DB::table('attendance_subject')
+                ->where('attendance_id', $subj_id)
+                ->where('student_id', $stud_id)
+                ->value('id');
+        if ($id) {
+            DB::table('attendance_subject')->where('id', $id)->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
     }
 }

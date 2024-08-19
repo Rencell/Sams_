@@ -15,7 +15,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js" defer></script>
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.bootstrap5.js" defer></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/dataTables.buttons.js" defer></script>
@@ -27,12 +27,21 @@
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js" defer></script>
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.bootstrap5.css">
-    
+    <link rel="stylesheet" href="{{ asset('/css/argon/argon.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/css/argon/custom.css') }}">
     <title>@yield('title')</title>
-    
+
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <link rel="stylesheet" href="{{ asset('css/sams.css') }}">
+
+
     <style>
         .dt-buttons .buttons-copy,
         .dt-buttons .buttons-excel,
@@ -40,7 +49,14 @@
             font-size: 12px;
             /* Adjust the font size as needed */
             background-color: #2c3e50;
+            border: none;
+            color: white;
         }
+
+        div.dt-container div.dt-paging{
+            margin-bottom: 20px;
+        }
+
     </style>
 
     @yield('style')

@@ -15,11 +15,15 @@ return new class extends Migration
             
             $table->foreignId('subject_id')
                             ->constrained()
+                            ->onDelete('cascade')
+                            ->onUpdate('cascade')
                             ->references('id')
                             ->on('subjects');
             $table->string('student_id');   
             $table->foreign('student_id')
                             ->constrained()
+                            ->onDelete('cascade')
+                            ->onUpdate('cascade')
                             ->references('id')
                             ->on('students');
             $table->primary(['subject_id', 'student_id']);
