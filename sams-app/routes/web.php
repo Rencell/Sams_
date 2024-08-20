@@ -48,10 +48,12 @@ Route::controller(studentController::class)->middleware('auth')->group(function 
 Route::controller(subjectController::class)->middleware('auth')->group(function () {
     Route::get('subject', 'index')->name('subject.index');
     Route::get('subject/{id}', 'manageStudent')->name('subject.manageStudent');
+    Route::post('subject/archive', 'archive')->name('subject.archive');
     Route::post('subject/{id}', 'storeStudent')->name('subject.studentstore');
     Route::post('subject', 'store')->name('subject.store');
     Route::put('subject/{id}', 'update')->name('subject.update');
     Route::delete('subject/{id}', 'destroy')->name('subject.destroy');
+    
     
 });
 
@@ -69,6 +71,7 @@ Route::controller(attendanceController::class)->middleware('auth')->group(functi
 
     Route::post('Attendance/{attendance_id}/{student_id}', 'restoreAbsent')->name('attendance.restoreAbsent');
     Route::delete('attendance/{subj_id}/{stud_id}', 'destroy')->name('attendance.destroystudent');
+    Route::delete('attendance/{attendance_id}', 'destroyAttendance')->name('attendance.destroyAttendance');
 });
 
 

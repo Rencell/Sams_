@@ -32,7 +32,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Close</button>
 
-                <button type="button" class="btn btn-primary" onclick="updateForm({{ $subject->id }}, this)">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="updateForm({{ $subject->id }}, this)">Save
+                    changes</button>
 
             </div>
             </form>
@@ -42,20 +43,28 @@
 
 <script>
     function updateForm(subject_id, element) {
-        
+
         var form = $('#formupdate_' + subject_id);
 
-        
+
         $.ajax({
             url: '/subject/' + subject_id,
             type: 'PUT',
             data: form.serialize(),
             dataType: 'json',
             success: function(response) {
-                console.log(response);
-
                 $('#updateModal_' + subject_id).modal('hide');
-                location.reload();
+                swal({
+                        title: "Good job!",
+                        text: "Updated successfully!",
+                        icon: "success"
+                    })
+                    .then((click) => {
+                        if (click) {
+                            location.reload();
+                        }
+                    });
+
 
             },
             error: function(xhr) {
@@ -75,7 +84,7 @@
         });
     }
     $(document).ready(function() {
-       
+
         $('.close-button').on('click', function() {
             $('.form-control').removeClass('is-invalid');
         });

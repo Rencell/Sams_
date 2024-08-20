@@ -14,6 +14,7 @@
                 <div class="float-end">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">+
                         Create</button>
+                        <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#archivemodal"><i class="bi bi-archive" ></i></button>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                                         <form method="POST" action="{{ route('subject.destroy', $subject->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm"><i
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteConfirmation(event, this)"><i
                                                     class="bi bi-trash-fill"></i></button>
                                         </form>
                                     </td>
@@ -71,7 +72,7 @@
         </div>
     </div>
 
-
+    @extends('Teacher.Subject.modals.recover')
     @extends('Teacher.Subject.modals.create-modal')
 
 

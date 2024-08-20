@@ -17,7 +17,8 @@ class subjectController extends Controller
     public function index()
     {
         $Subjects = Subject::where('teacher_id',Auth::id())->with('user')->get();
-        return view('Teacher.Subject.index', compact('Subjects'));
+        $ArchivedSubjects = Subject::onlyTrashed()->get();
+        return view('Teacher.Subject.index', compact('Subjects', 'ArchivedSubjects'));
     }
 
     public function manageStudent($id)
@@ -33,7 +34,7 @@ class subjectController extends Controller
     }
 
     public function storeStudent(Request $request, $id){
-        Log::info($request);
+        
         $selectedPeopleIds = $request->selected_people;
         $subject = Subject::find($id);
 
@@ -112,6 +113,18 @@ class subjectController extends Controller
     public function destroy(string $id)
     {
         Subject::find($id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function archive(Request $request){
+        $selectedPeopleIds = $request->input('selected_people', []);
+
+        if (is_array($selectedPeopleIds))
+            if(!empty($selectedPeopleIds)){
+                Subject::withTrashed()->whereIn('id', $selectedPeopleIds)->restore();
+            }
+        
 
         return redirect()->back();
     }

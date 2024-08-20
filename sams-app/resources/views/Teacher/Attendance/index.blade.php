@@ -11,10 +11,7 @@
                 <div class="fs-3 text-end">Monday 05, 2024</div>
             </div>
             <div>
-                <div class="float-end">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">+
-                        Create</button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -24,7 +21,7 @@
             <div class="col-12">
                 <div class="card shadow m-3 mb-5">
                     <div class="card-header text-bold">
-                       Attendance Logs
+                        Attendance Logs
                     </div>
                     <table class="table">
                         <thead class="table-light">
@@ -39,8 +36,19 @@
                                 <tr>
                                     <th scope="row">{{ $attendance->subject->name }}</th>
                                     <td>{{ $attendance->date_attendance }}</td>
-                                    <td><a href="{{ route('attendance.index', $attendance->id) }}"
-                                            class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></a></td>
+
+
+                                    <td class="d-flex"><a href="{{ route('attendance.index', $attendance->id) }}"
+                                            class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></a>
+                                        <form method="POST" action="{{ route('attendance.destroyAttendance', $attendance->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm"  onclick="deleteConfirmation(event,this)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+
                                 </tr>
                             @endforeach
 

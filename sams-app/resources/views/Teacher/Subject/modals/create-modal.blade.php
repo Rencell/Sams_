@@ -39,35 +39,44 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-        $('#formcreate').on('submit', function(e){
+    $(document).ready(function() {
+        $('#formcreate').on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
-                url:    $(this).attr('Action'),
-                type:   'POST',
-                data:   $(this).serialize(),
+                url: $(this).attr('Action'),
+                type: 'POST',
+                data: $(this).serialize(),
 
-                success: function(response){
+                success: function(response) {
 
-                    $('#createmodal').modal('hide');
-                    location.reload();
+                    $('#createModal').modal('hide');
+                    swal({
+                            title: "Good job!",
+                            text: "The subject has been created!",
+                            icon: "success"
+                        })
+                        .then((click) => {
+                            if (click) {
+                                location.reload();
+                            }
+                        });
                 },
-                error: function(response){
-                    
+                error: function(response) {
+
                     $('.form-control').removeClass('is-invalid');
 
                     error = response.responseJSON.errors;
                     console.log(error);
-                    
-                    $.each(error, function(key, message){
-                        input = $('#'+key);
+
+                    $.each(error, function(key, message) {
+                        input = $('#' + key);
                         input.addClass('is-invalid');
-                        input.next('.invalid-feedback').text(message) ;
+                        input.next('.invalid-feedback').text(message);
 
                     });
-                    
-                    
+
+
                 }
             });
         });

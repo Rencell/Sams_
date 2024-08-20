@@ -33,13 +33,16 @@
                                         <td>{{ $studentView->Fname }}</td>
                                         <td>{{ $studentView->Lname }}</td>
 
-                                        <form method="POST"
-                                            action="{{ route('attendance.destroystudent', ['subj_id' => $attendanceId, 'stud_id' => $studentView->id]) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <td><button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="bi bi-trash-fill"></i></button></td>
-                                        </form>
+                                        <td>
+                                            <form method="POST"
+                                                action="{{ route('attendance.destroystudent', ['subj_id' => $attendanceId, 'stud_id' => $studentView->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="deleteConfirmation(event, this)"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -64,14 +67,18 @@
                                         <th scope="row">{{ $student_absent->id }}</th>
                                         <td>{{ $student_absent->Fname }}</td>
                                         <td>{{ $student_absent->Lname }}</td>
-                                        <form method="POST"
-                                            action="{{ route('attendance.restoreAbsent', ['attendance_id' => $attendanceId, 'student_id' => $student_absent->id]) }}">
-                                            @csrf
-                                            <input type="hidden" name="attendanceId" value="{{ $attendanceId }}">
-                                            <input type="hidden" name="scan_text" value="{{ $student_absent->id }}">
-                                            <td><button class="btn btn-danger btn-sm"><i
-                                                        class="bi bi-trash-fill"></i></button></td>
-                                        </form>
+                                        <td>
+                                            <form method="POST"
+                                                action="{{ route('attendance.restoreAbsent', ['attendance_id' => $attendanceId, 'student_id' => $student_absent->id]) }}">
+                                                @csrf
+                                                <input type="hidden" name="attendanceId" value="{{ $attendanceId }}">
+                                                <input type="hidden" name="scan_text"
+                                                    value="{{ $student_absent->id }}">
+                                                <button class="btn btn-danger btn-sm"
+                                                    onclick="deleteConfirmation(event, this)"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                            </form>
+                                        <td>
                                     </tr>
                                 @endforeach
                             </tbody>

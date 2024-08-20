@@ -96,8 +96,9 @@
     </style>
 @endsection
 @section('content')
-   
-    <a href="/dashboard" class="btn btn-dark m-3" style="position: absolute; left:0; top:0;"><i class="fs-4 bi bi-house-door-fill text-white"></i></a>
+    <button type="button" class="btn btn-dark m-3" style="position: absolute; left:0; top:0;" onclick="rfidAttendance()">
+        <i class="fs-4 bi bi-house-door-fill text-white"></i>
+    </button>
     <div class="title">RFID BASED ATTENDANCE</div>
     <div id="Alert" class="alert" role="alert">
     </div>
@@ -129,6 +130,19 @@
 
 @push('script')
     <script>
+        function rfidAttendance() {
+            swal({
+                    title: "Finish Attendance?",
+                    text: "Are you sure you want to go home?",
+                    icon: "warning",
+                    buttons: true,
+                })
+                .then((click) => {
+                    if (click) {
+                        window.location.href = "/dashboard"
+                    }
+                });
+        }
         $(document).ready(function() {
             scan_text = '';
             $(document).on('keydown', function(e) {
@@ -177,7 +191,7 @@
 
             var today = new Date().toISOString().split('T')[0];
             $('#dated').val(today);
-       
+
         });
     </script>
 @endpush

@@ -37,7 +37,7 @@
                         <tbody>
                             @foreach ($Student as $student)
                                 <tr>
-                                    <td  class="text-capitalize" style="text-align: left">{{ $student->id }}</td>
+                                    <td class="text-capitalize" style="text-align: left">{{ $student->id }}</td>
                                     <td class="text-capitalize">{{ $student->Fname }}</td>
                                     <td class="text-capitalize">{{ $student->Lname }}</td>
                                     <td>
@@ -46,7 +46,9 @@
                                                 data-bs-target="#updateModal_{{ $student->id }}"><i
                                                     class="bi bi-pencil"></i></button>
                                             {{-- Modal Update --}}
-                                            @include('Admin.Student.modals.update-modal', ['Student' => $student])
+                                            @include('Admin.Student.modals.update-modal', [
+                                                'Student' => $student,
+                                            ])
                                             <form method="POST" action="{{ route('student.destroy', $student->id) }}">
                                                 @csrf
                                                 @method('DELETE')
@@ -81,7 +83,8 @@
                             buttons: [{
                                     extend: 'copy',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: ':visible',
+                                        columns: [0, 1, 2]
                                     }
 
                                 },
@@ -96,6 +99,10 @@
                                     extend: 'pdf',
                                     exportOptions: {
                                         columns: [0, 1, 2]
+                                    },
+                                    customize: function(doc) {
+                                        doc.content[1].table.widths = '*'.repeat(doc.content[1].table
+                                            .body[0].length).split('');
                                     }
                                 }
                             ]

@@ -145,6 +145,12 @@ class attendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function destroyAttendance(string $attendance_id){
+        $attendance = Attendance::find($attendance_id);
+        $attendance->delete();
+
+        return redirect()->back();
+    }
     public function destroy(string $subj_id, string $stud_id)
     {
         $id = DB::table('attendance_subject')

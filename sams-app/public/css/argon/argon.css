@@ -18,7 +18,7 @@
 */
 :root
 {
-    --system: #383F45;
+    --system: #8c89f0;
     --blue: rgb(64, 64, 247);
     --indigo: #5603ad;
     --purple: #8965e0;
@@ -33,7 +33,7 @@
     --gray: #8898aa;
     --gray-dark: #32325d;
     --lighter: #e9ecef;
-    --primary: #ED4C67;
+    --primary: #6F63E6;
     --secondary: #f7fafc;
     --success: #2dce89;
     --info: #11cdef;

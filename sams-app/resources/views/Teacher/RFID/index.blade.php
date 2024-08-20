@@ -1,7 +1,7 @@
 <x-layout>
 
 
-    <div class="h-35 d-flex justify-content-between rounded-bottom-2 shadow-sm System-color text-white" >
+    <div class="h-35 d-flex justify-content-between rounded-bottom-2 shadow-sm System-color text-white">
         <div class="col-3 d-flex flex-column p-4">
             <div class="fs-3">RFID Attendance</div>
             <i class="bi-phone-vibrate-fill" style="font-size: 5rem"></i>
@@ -23,36 +23,37 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
     <script>
         function startRfid() {
-            subject_id = $('#subject').val();
 
-            $.ajax({
-                url: '{{ route('rfid.store') }}',
-                method: 'POST',
-                data: {
-                    subject_id: subject_id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    window.location.replace('rfid-start/' + subject_id);
-                },
-                error: function(error) {
-                    console.log(error);
+            swal({
+                    title: "Start an RFID Attendance?",
+                    text: "This will start an RFID Attendance session",
+                    icon: "info",
+                    buttons: true
+                })
+                .then((click) => {
+                    if (click) {
+                        subject_id = $('#subject').val();
 
-                }
-            });
+                        $.ajax({
+                            url: '{{ route('rfid.store') }}',
+                            method: 'POST',
+                            data: {
+                                subject_id: subject_id,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                window.location.replace('rfid-start/' + subject_id);
+                            },
+                            error: function(error) {
+                                console.log(error);
+
+                            }
+                        });
+                    }
+                });
+
         }
     </script>
 </x-layout>
