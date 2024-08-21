@@ -48,6 +48,8 @@
     {{-- <script src={{asset('js/bootstrap.min.js')}}></script> --}}
 
     <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
+    <script src="{{ asset('js/updateModal.js') }}"></script>
+    <script src="{{ asset('js/createModal.js') }}"></script>
     @stack('script')
 
 

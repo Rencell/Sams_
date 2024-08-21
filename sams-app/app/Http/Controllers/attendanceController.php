@@ -22,11 +22,12 @@ class attendanceController extends Controller
        
         $teacherId = Auth::user()->id;
         
-        $attendances =  Attendance::with('subject')->whereHas('subject', function($query) use ($teacherId){
+        $attendanceQuery =  Attendance::with('subject')->whereHas('subject', function($query) use ($teacherId){
             $query->where('teacher_id', $teacherId);
-        })->get();
-
-        return view('Teacher.Attendance.index', compact('attendances'));
+        });
+        $attendances = $attendanceQuery->get();
+        $archivedAttendances = $attendanceQuery->onlyTrashed()->get();
+        return view('Teacher.Attendance.index', compact('attendances', 'archivedAttendances'));
     }
 
     /**
@@ -151,6 +152,18 @@ class attendanceController extends Controller
 
         return redirect()->back();
     }
+    // Soft deletes recovery
+    public function archive(Request $request){
+        $selectedAttendanceIds = $request->input('selected_attendances', []);
+
+        if (is_array($selectedAttendanceIds))
+            if(!empty($selectedAttendanceIds))
+                Attendance::withTrashed()->whereIn('id', $selectedAttendanceIds)->restore();
+            
+        return redirect()->back();
+    }
+
+
     public function destroy(string $subj_id, string $stud_id)
     {
         $id = DB::table('attendance_subject')

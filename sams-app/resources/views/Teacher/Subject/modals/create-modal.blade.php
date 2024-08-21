@@ -8,12 +8,12 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('subject.store') }}" id="formcreate">
+                <form method="POST" action="{{ route('subject.store') }}" id="formmodal">
                     @csrf
 
                     <div class="mb-3 flex-grow-1">
                         <label for="stud_id" class="form-label">Subject Name: </label>
-                        <input type="text" class="form-control" id="subject_name" aria-describedby="emailHelp"
+                        <input type="text" class="form-control" id="subject_name_create" aria-describedby="emailHelp"
                             name="subject_name">
                         <span class="invalid-feedback"></span>
                     </div>
@@ -21,68 +21,19 @@
 
                     <div class="mb-3 flex-grow-1">
                         <label for="rfid" class="form-label">Description: </label>
-                        <input type="text" class="form-control" id="description" aria-describedby="emailHelp"
+                        <input type="text" class="form-control" id="description_create" aria-describedby="emailHelp"
                             name="description">
                         <span class="invalid-feedback"></span>
                     </div>
-
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Close</button>
 
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary" onclick="createModal()">Save changes</button>
 
             </div>
-            </form>
+            
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#formcreate').on('submit', function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: $(this).attr('Action'),
-                type: 'POST',
-                data: $(this).serialize(),
-
-                success: function(response) {
-
-                    $('#createModal').modal('hide');
-                    swal({
-                            title: "Good job!",
-                            text: "The subject has been created!",
-                            icon: "success"
-                        })
-                        .then((click) => {
-                            if (click) {
-                                location.reload();
-                            }
-                        });
-                },
-                error: function(response) {
-
-                    $('.form-control').removeClass('is-invalid');
-
-                    error = response.responseJSON.errors;
-                    console.log(error);
-
-                    $.each(error, function(key, message) {
-                        input = $('#' + key);
-                        input.addClass('is-invalid');
-                        input.next('.invalid-feedback').text(message);
-
-                    });
-
-
-                }
-            });
-        });
-
-        $('.close-button').on('click', function() {
-            $('.form-control').removeClass('is-invalid');
-        });
-    });
-</script>

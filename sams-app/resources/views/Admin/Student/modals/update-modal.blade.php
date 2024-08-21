@@ -7,10 +7,9 @@
                 <button type="button" class="btn-close close-button" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            {{-- Modal Body --}}
             <div class="modal-body">
                 {{-- problem here --}}
-                <form id="updateform_{{ $student->id }}">
+                <form id="updateform_{{ $student->id }}" action="{{route('student.update', $student->id)}}">
                     @csrf
                     <div class="mb-3 flex-grow-1">
                         <label for="id" class="form-label">Student ID.</label>
@@ -81,51 +80,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function updateForm(student_id) {
-
-
-        var form = $('#updateform_' + student_id);
-
-        $.ajax({
-            url: '/student/' + student_id,
-            type: 'PUT',
-            data: form.serialize(),
-            dataType: 'json',
-            success: function(response) {
-                console.log(response);
-
-                $('#updateModal_' + student_id).modal('hide');
-                location.reload();
-
-            },
-            error: function(xhr) {
-                console.log(xhr);
-                if (xhr.responseJSON && xhr.responseJSON.errors) {
-                    $('.form-control').removeClass('is-invalid');
-                    var errors = xhr.responseJSON.errors;
-
-                    $.each(errors, function(key, messages) {
-                        var input = $('#' + key + '_' + student_id);
-                        input.addClass('is-invalid');
-                        input.next('.invalid-feedback').text(messages);
-                    });
-                } else {
-                    console.error('Unexpected error structure:', xhr);
-                }
-            }
-        });
-    }
-
-
-    $(document).ready(function() {
-
-
-
-
-        $('.close-button').on('click', function() {
-            $('.form-control').removeClass('is-invalid');
-        });
-    });
-</script>

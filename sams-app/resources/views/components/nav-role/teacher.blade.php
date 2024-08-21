@@ -35,10 +35,10 @@
         </x-slot>
     </x-nav>
 
-    <x-nav href="/setting" :active="request()->is('setting')">
-        <i class="fs-4 bi-key"></i>
+    <x-nav href="/profile" :active="request()->is('profile')">
+        <i class="fs-4 bi-person-circle "></i>
         <x-slot name="label">
-            Change Password
+            Profile
         </x-slot>
     </x-nav>
 

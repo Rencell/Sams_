@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="h-35 d-flex justify-content-between" style="background-color: #3a3637; color: white">
+    <div class="h-35 d-flex justify-content-between System-color text-white">
         <div class="col-3 d-flex flex-column p-4">
             <div class="fs-3">Students</div>
             <i class="bi-people" style="font-size: 5rem"></i>
@@ -14,6 +14,8 @@
                 <div class="float-end">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
                         data-bs-target="#createModal">+Create</button>
+                    <button class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#archivemodal"><i
+                            class="bi bi-archive"></i></button>
                 </div>
             </div>
         </div>
@@ -52,7 +54,7 @@
                                             <form method="POST" action="{{ route('student.destroy', $student->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn bg-danger btn-sm"><i
+                                                <button type="submit" class="btn bg-danger btn-sm" onclick="deleteConfirmation(event, this)"><i
                                                         class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </div>
@@ -69,6 +71,7 @@
 
 
     @extends('Admin.Student.modals.create-modal')
+    @extends('Admin.Student.modals.recover')
 
 
     @push('script')
@@ -111,37 +114,7 @@
                 });
 
                 // Create Modal
-                $("#formmodal").on('submit', function(e) {
-
-                    e.preventDefault();
-                    $.ajax({
-                        url: '{{ route('student.store') }}',
-                        type: 'POST',
-                        data: $(this).serialize(),
-                        success: function(response) {
-
-                            $('#createModal').modal('hide');
-                            location.reload();
-                        },
-                        error: function(response) {
-
-                            $('.form-control').removeClass('is-invalid');
-                            var errors = response.responseJSON.errors;
-
-                            $.each(errors, function(key, messages) {
-                                input = $('#' + key + '_create');
-                                input.addClass('is-invalid');
-                                input.next('.invalid-feedback').text(messages);
-                            });
-
-                        }
-                    });
-                });
-
-
-                $('.close-button').on('click', function() {
-                    $('.form-control').removeClass('is-invalid');
-                });
+                
 
                 let inputBuffer = '';
                 // automatically scans the rfid input

@@ -3,25 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class navigationController extends Controller
 {
     public function Dashboard(){
-        return view('Teacher.Dashboard.index');
-    }
-    public function Student(){
-        return view('Teacher.Student.student');
-    }
-    public function Subject(){
-        return view('Teacher.Subject.index');
-    }
-    public function RFID(){
-       
-    }
-    public function Setting(){
-        return view('setting');
-    }
-    public function Attendance(){
-        return view('Attendance');
+        $user = Auth::user()->name;
+        return view('Teacher.Dashboard.index', compact('user'));
     }
 }

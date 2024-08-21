@@ -8,7 +8,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('subject.archive') }}" id="subjectrecover">
+                <form method="POST" action="{{ route('attendance.archive') }}" id="attendancerecover">
                     @csrf
 
                     <table class="table" id="example">
@@ -20,13 +20,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($ArchivedSubjects as $ArchivedSubject)
+                            @foreach ($archivedAttendances as $archivedAttendance)
                                 <tr>
                                     <th scope="row">
-                                        <input type="checkbox" name="selected_subjects[]" value="{{$ArchivedSubject->id}}">
+                                        <input type="checkbox" name="selected_attendances[]"
+                                            value="{{ $archivedAttendance->id }}">
                                     </th>
-                                    <td>{{ $ArchivedSubject->name }}</td>
-                                    <td>{{ $ArchivedSubject->description }}</td>
+                                    <td>{{ $archivedAttendance->subject->name }}</td>
+                                    <td>{{ $archivedAttendance->date_attendance }}</td>
                                 </tr>
                             @endforeach
 

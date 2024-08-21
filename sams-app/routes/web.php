@@ -4,11 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\rfidController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\subjectController;
 use App\Http\Controllers\attendanceController;
 use App\Http\Controllers\navigationController;
 use App\Http\Controllers\admin\admin_studentController;
+use App\Http\Controllers\admin\admin_teacherController;
+use App\Http\Controllers\admin\admin_adminController;
 
 Route::get('/', function () {})->middleware('auth');
 Route::get('/admin', function () {})->middleware('auth')->middleware('isAdmin');
@@ -29,11 +32,6 @@ Route::middleware('auth')->group(function () {
     //Route::get('/attendance', [navigationController::class, 'Attendance']);
 });
 
-Route::controller(adminController::class)->middleware('isAdmin')->group(function () {
-    //Route::get('admin/student', 'student');
-    Route::get('admin/teacher', 'teacher');
-    Route::get('admin/admins', 'admin');
-});
 
 // Teacher view
 
@@ -53,6 +51,7 @@ Route::controller(subjectController::class)->middleware('auth')->group(function 
     Route::post('subject', 'store')->name('subject.store');
     Route::put('subject/{id}', 'update')->name('subject.update');
     Route::delete('subject/{id}', 'destroy')->name('subject.destroy');
+    Route::delete('subject/deleteStudent/{subj_id}/{stud_id}', 'deleteStudent')->name('subject.deleteStudent');
     
     
 });
@@ -66,6 +65,7 @@ Route::controller(rfidController::class)->middleware('auth')->group(function(){
 Route::controller(attendanceController::class)->middleware('auth')->group(function(){
     
     Route::get('/attendance', 'index');
+    Route::post('/attendance/archive', 'archive')->name('attendance.archive');
     Route::get('/attendance/{attendance_id}', 'manageSubject')->name('attendance.index');
     Route::post('rfid-start/{attendance_id}', 'store')->name('attendance.store');
 
@@ -73,11 +73,35 @@ Route::controller(attendanceController::class)->middleware('auth')->group(functi
     Route::delete('attendance/{subj_id}/{stud_id}', 'destroy')->name('attendance.destroystudent');
     Route::delete('attendance/{attendance_id}', 'destroyAttendance')->name('attendance.destroyAttendance');
 });
+Route::controller(profileController::class)->middleware('auth')->group(function(){
+    
+    Route::get('/profile', 'index');
+    Route::post('/profile', 'update')->name('profile.updateProfile');
+    Route::post('/profile/password', 'updatePass')->name('profile.updatePassword');
+   
+});
 
 
 Route::prefix('admin')->namespace('App\Http\Controllers\admin')->middleware('isAdmin')->group(function () {
 
     Route::controller(admin_studentController::class)->group(function () {
         Route::get('student', 'index');
+        Route::post('student/archive', 'archive')->name('student-admin.archive');
+    });
+
+    Route::controller(admin_teacherController::class)->group(function () {
+        Route::get('teacher', 'index');
+        Route::post('teacher', 'store')->name('admin-teacher.store');
+        Route::put('teacher/update/{id}', 'update')->name('admin-teacher.update');
+        Route::delete('teacher/destroy/{user_id}', 'destroy')->name('admin-teacher.destroy');
+        Route::post('teacher/archive', 'archive')->name('admin-teacher.archive');
+    });
+
+    Route::controller(admin_adminController::class)->group(function () {
+        Route::get('admins', 'index');
+        Route::post('admins/create', 'store')->name('admin.store');
+        Route::put('admins/update/{id}', 'update')->name('admin.update');
+        Route::delete('admins/destroy/{admin_id}', 'destroy')->name('admin.destroy');
+        Route::post('admins/archive', 'archive')->name('admin.archive');
     });
 });

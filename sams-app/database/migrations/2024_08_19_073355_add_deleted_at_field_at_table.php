@@ -20,6 +20,10 @@ return new class extends Migration
         Schema::table('students', function (Blueprint $table) {
             $table->softDeletes();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -34,6 +38,9 @@ return new class extends Migration
             $table->dropSoftDeletes();
         });
         Schema::table('students', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+        Schema::table('users', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

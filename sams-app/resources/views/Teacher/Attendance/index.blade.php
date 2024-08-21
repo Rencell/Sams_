@@ -11,7 +11,7 @@
                 <div class="fs-3 text-end">Monday 05, 2024</div>
             </div>
             <div>
-                
+                <button class="btn btn-dark float-end"  data-bs-toggle="modal" data-bs-target="#archivemodal"><i class="bi bi-archive" ></i></button>
             </div>
         </div>
     </div>
@@ -58,4 +58,6 @@
             </div>
         </div>
     </div>
+
+    @extends('Teacher.Attendance.Modal.recover')
 </x-layout>

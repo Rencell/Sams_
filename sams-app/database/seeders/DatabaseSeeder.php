@@ -17,17 +17,23 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Rencell',
+            'fname' => 'Rencell',
+            'lname' => 'tobelonia',
+            'gender' => 'male',
+            'birth' => '2004-02-06',
             'email' => 'rencell@gmail.com',
             'password' => 'password'
         ]);
 
         User::factory()->create([
-            'name' => 'Janice',
+            'fname' => 'Janice',
+            'lname' => 'lumawag',
+            'gender' => 'female',
+            'birth' => '2003-05-11',
             'email' => 'janice@gmail.com',
             'password' => 'password'
         ]);
 
-        //Student::factory(50)->create();
+        Student::factory(50)->create();
     }
 }

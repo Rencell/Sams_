@@ -17,9 +17,9 @@ class admin_studentController extends Controller
     public function index()
     {
        
-       $Student = Student::get();
-
-       return view('Admin.Student.index', compact('Student'));
+        $Student = Student::get();
+        $archivedStudents = Student::onlyTrashed()->get();
+       return view('Admin.Student.index', compact('Student', 'archivedStudents'));
     }
 
     /**
@@ -28,6 +28,19 @@ class admin_studentController extends Controller
     public function create()
     {
         //
+    }
+
+    public function archive(Request $request)
+    {
+        $selectedStudentIds = $request->input('selected_students', []);
+
+        if (is_array($selectedStudentIds))
+            if(!empty($selectedStudentIds)){
+                Student::withTrashed()->whereIn('id', $selectedStudentIds)->restore();
+            }
+        
+
+        return redirect()->back();
     }
 
     /**
@@ -43,6 +56,7 @@ class admin_studentController extends Controller
             'gender'    => 'required|max:10',
             's_email'   => 'required|email|max:255|unique:students,email',
             'birth'     => 'required|date',
+            
         ]);
 
 

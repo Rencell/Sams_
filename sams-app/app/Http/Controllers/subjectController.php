@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +17,9 @@ class subjectController extends Controller
      */
     public function index()
     {
-        $Subjects = Subject::where('teacher_id',Auth::id())->with('user')->get();
-        $ArchivedSubjects = Subject::onlyTrashed()->get();
+        $subjectQuery = Subject::where('teacher_id',Auth::id())->with('user');
+        $Subjects = $subjectQuery->get();
+        $ArchivedSubjects = $subjectQuery->onlyTrashed()->get();
         return view('Teacher.Subject.index', compact('Subjects', 'ArchivedSubjects'));
     }
 
@@ -43,7 +45,14 @@ class subjectController extends Controller
         return redirect()->back()->with('success', 'Students updated successfully!');;
     }
 
-   
+    public function deleteStudent($subj_id , $stud_id){
+        DB::table('subject_student')
+            ->where('subject_id', $subj_id)
+            ->where('student_id', $stud_id)
+            ->delete();
+
+        return redirect()->back();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -93,7 +102,7 @@ class subjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validation = $request->validate([
+        $request->validate([
             'name'  => 'required',
             'description'   => 'required',
         ]);
@@ -118,11 +127,11 @@ class subjectController extends Controller
     }
 
     public function archive(Request $request){
-        $selectedPeopleIds = $request->input('selected_people', []);
+        $selectedSubjectIds = $request->input('selected_subjects', []);
 
-        if (is_array($selectedPeopleIds))
-            if(!empty($selectedPeopleIds)){
-                Subject::withTrashed()->whereIn('id', $selectedPeopleIds)->restore();
+        if (is_array($selectedSubjectIds))
+            if(!empty($selectedSubjectIds)){
+                Subject::withTrashed()->whereIn('id', $selectedSubjectIds)->restore();
             }
         
 

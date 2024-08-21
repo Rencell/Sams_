@@ -2,31 +2,34 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="archivemodalLabel">Recovery subjects</h1>
+                <h1 class="modal-title fs-5" id="archivemodalLabel">Recovery teachers</h1>
                 <button type="button" class="btn-close close-button" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('subject.archive') }}" id="subjectrecover">
+                <form method="POST" action="{{ route('admin-teacher.archive') }}">
                     @csrf
 
                     <table class="table" id="example">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">Select</th>
-                                <th scope="col">Subject Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Stud no.</th>
+                                <th scope="col">first name</th>
+                                <th scope="col">last Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($ArchivedSubjects as $ArchivedSubject)
+                            @foreach ($archivedTeachers as $archivedTeacher)
                                 <tr>
                                     <th scope="row">
-                                        <input type="checkbox" name="selected_subjects[]" value="{{$ArchivedSubject->id}}">
+                                        <input type="checkbox" name="selected_teacher[]"
+                                            value="{{ $archivedTeacher->id }}">
                                     </th>
-                                    <td>{{ $ArchivedSubject->name }}</td>
-                                    <td>{{ $ArchivedSubject->description }}</td>
+                                    <td>{{ $archivedTeacher->id }}</td>
+                                    <td>{{ $archivedTeacher->fname }}</td>
+                                    <td>{{ $archivedTeacher->lname }}</td>
                                 </tr>
                             @endforeach
 
