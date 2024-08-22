@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
 use id;
 use Carbon\Carbon;
@@ -9,7 +9,7 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class rfidController extends Controller

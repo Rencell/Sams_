@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller

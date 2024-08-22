@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 {{-- problem here --}}
-                <form id="updateform_{{ $student->id }}" action="{{route('student.update', $student->id)}}">
+                <form id="updateform_{{ $student->id }}" action="{{route('student.update', $student->id)}}" autocomplete="off">
                     @csrf
                     <div class="mb-3 flex-grow-1">
                         <label for="id" class="form-label">Student ID.</label>

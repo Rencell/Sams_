@@ -11,7 +11,7 @@
                 <form method="POST" action="{{ route('subject.studentstore', ['id' => $id]) }}" id="formcreate">
                     @csrf
 
-                    <table class="table" id="example">
+                    <table class="table" id="tableSelect">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">Select</th>
@@ -50,9 +50,10 @@
 
 <script>
     $(document).ready(function() {
-        new DataTable('#example', {
+        new DataTable('#tableSelect', {
             ordering: false,
-            info: false
+            info: false,
+            lengthChange: false,
         });
     });
 </script>

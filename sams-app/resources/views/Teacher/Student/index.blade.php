@@ -15,7 +15,7 @@
     <div class="container-fluid mt-4">
         <div class="row">
             <div class="col-12">
-                <div class="card shadow m-3 p-2 mb-5">
+                <div class="card shadow m-3 mb-5">
                     <div class="card-header text-bold">
                         All Students
                     </div>

@@ -8,7 +8,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('student-admin.archive') }}" id="studentrecover">
+                <form method="POST" action="{{ route('student-admin.archive') }}" id="studentrecover" autocomplete="off">
                     @csrf
 
                     <table class="table" id="example">

@@ -48,7 +48,10 @@ class admin_studentController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $request->merge([
+            'stud_id' => ltrim($request->input('stud_id'))
+        ]);
+        
         $request->validate([
             'stud_id'   => 'required|unique:students,id',
             'fname'     => 'required|max:255',

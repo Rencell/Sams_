@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -60,12 +61,17 @@ class profileController extends Controller
         
         $user = Auth::user();
         $request->validate([
-            'name'          => 'required|max:255',
-            'email'   => 'required|max:255|email', Rule::unique('students', 'email')->ignore($user->id)
+            'First_name'          => 'required|max:255',
+            'Last_name'          => 'required|max:255',
+            'birth_date'          => 'required|date',
+            'email'   => 'required|max:255|email', Rule::unique('users', 'email')->ignore($user->id)
         ]);
 
-        $user->name = $request->name;
+        $user->fname = $request->First_name;
+        $user->lname = $request->Last_name;
         $user->email = $request->email;
+        $user->birth = $request->birth_date;
+        $user->gender = $request->gender;
         $user->update();
 
         return redirect()->back();

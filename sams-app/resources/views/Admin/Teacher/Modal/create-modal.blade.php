@@ -8,7 +8,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('admin-teacher.store') }}" id="formmodal">
+                <form method="POST" action="{{ route('admin-teacher.store') }}" id="formmodal" autocomplete="off">
                     @csrf
 
                     <div class="d-flex gap-2">

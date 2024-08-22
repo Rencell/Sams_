@@ -8,13 +8,13 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('student.store') }}" id="formmodal">
+                <form method="POST" action="{{ route('student.store') }}" id="formmodal" autocomplete="off">
                     @csrf
 
                     <div class="mb-3 flex-grow-1">
                         <label for="stud_id" class="form-label">Student ID.</label>
-                        <input type="text" class="form-control" id="stud_id_create" aria-describedby="emailHelp"
-                            name="stud_id">
+                        <input type="text" class="form-control" id="stud_id_create"
+                            aria-describedby="emailHelp" name="stud_id">
                         <span class="invalid-feedback"></span>
                     </div>
 
@@ -74,9 +74,13 @@
                 <button type="submit" class="btn btn-primary" onclick="createModal()">Save changes</button>
 
             </div>
-            
+
         </div>
     </div>
 </div>
 
-<script></script>
+<script>
+    $('#createModal').on('shown.bs.modal', function() {
+        $('#stud_id_create').focus();
+    })
+</script>

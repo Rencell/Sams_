@@ -12,8 +12,8 @@
             </div>
             <div>
                 <div class="float-end">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                        data-bs-target="#createModal">+Create</button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal"
+                        onclick="focusField()">+Create</button>
                     <button class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#archivemodal"><i
                             class="bi bi-archive"></i></button>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="card-header text-bold">
                         All Students
                     </div>
-                    <table id="exampletable" class="table display nowrap" style="width:100%">
+                    <table id="table" class="table display nowrap" style="width:100%">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col" style="text-align: left">Stud No.</th>
@@ -54,7 +54,8 @@
                                             <form method="POST" action="{{ route('student.destroy', $student->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn bg-danger btn-sm" onclick="deleteConfirmation(event, this)"><i
+                                                <button type="submit" class="btn bg-danger btn-sm"
+                                                    onclick="deleteConfirmation(event, this)"><i
                                                         class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </div>
@@ -76,45 +77,9 @@
 
     @push('script')
         <script>
+           
             $(document).ready(function() {
 
-                new DataTable('#exampletable', {
-
-                    ordering: false,
-                    layout: {
-                        topStart: {
-                            buttons: [{
-                                    extend: 'copy',
-                                    exportOptions: {
-                                        columns: ':visible',
-                                        columns: [0, 1, 2]
-                                    }
-
-                                },
-                                {
-                                    extend: 'excel',
-                                    exportOptions: {
-                                        columns: ':visible',
-                                        columns: [0, 1, 2]
-                                    }
-                                },
-                                {
-                                    extend: 'pdf',
-                                    exportOptions: {
-                                        columns: [0, 1, 2]
-                                    },
-                                    customize: function(doc) {
-                                        doc.content[1].table.widths = '*'.repeat(doc.content[1].table
-                                            .body[0].length).split('');
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                });
-
-                // Create Modal
-                
 
                 let inputBuffer = '';
                 // automatically scans the rfid input
@@ -133,7 +98,7 @@
                         return;
                     }
 
-                    $('#stud_id_create').val(inputBuffer);
+                    $('#stud_id_create').val( inputBuffer.replace(/^0+/, ''));
                     inputBuffer += event.key;
 
 

@@ -16,12 +16,12 @@
                     </div>
                     <div class="col">
                         <h1>Present</h1>
-                        <table class="table active">
+                        <table class="table active" id="table">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Student ID.</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
+                                    <th scope="col" style="text-align: left">Student ID.</th>
+                                    <th scope="col">First name</th>
+                                    <th scope="col">Last name</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -29,7 +29,7 @@
                                 @foreach ($studentViews as $studentView)
                                     <tr>
 
-                                        <th scope="row">{{ $studentView->id }}</th>
+                                        <th scope="row" style="text-align: left">{{ $studentView->id }}</th>
                                         <td>{{ $studentView->Fname }}</td>
                                         <td>{{ $studentView->Lname }}</td>
 
@@ -51,10 +51,10 @@
 
                     <div class="col">
                         <h1>Absent</h1>
-                        <table class="table">
+                        <table class="table" id="table2">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Student ID.</th>
+                                    <th scope="col" style="text-align: left">Student ID.</th>
                                     <th scope="col">First</th>
                                     <th scope="col">Last</th>
                                     <th scope="col">Action</th>
@@ -64,7 +64,7 @@
                                 @foreach ($student_absents as $student_absent)
                                     <tr>
 
-                                        <th scope="row">{{ $student_absent->id }}</th>
+                                        <th scope="row" style="text-align: left">{{ $student_absent->id }}</th>
                                         <td>{{ $student_absent->Fname }}</td>
                                         <td>{{ $student_absent->Lname }}</td>
                                         <td>
@@ -78,7 +78,7 @@
                                                     onclick="deleteConfirmation(event, this)"><i
                                                         class="bi bi-trash-fill"></i></button>
                                             </form>
-                                        <td>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -112,5 +112,10 @@
             console.log($(element).attr('class'));
 
         }
+
+
+        $(document).ready(function() {
+          
+        });
     </script>
 </x-layout>

@@ -9,7 +9,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form id="updateform_{{ $Admin->id }}" action="{{route('admin.update', $Admin->id)}}">
+                <form id="updateform_{{ $Admin->id }}" action="{{route('admin.update', $Admin->id)}}" autocomplete="off">
                     @csrf
 
 

@@ -18,17 +18,17 @@
             <div class="col p-0 d-flex flex-column gap-2">
                 <div class="flex-grow-1 rounded-3 d-flex justify-content-between align-items-center p-2 System-color" style="font-size: 50px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
                     <div class="d-flex flex-column ms-3 h-100" >
-                        <div class="fs-6 " >Total Students</div>
-                        <div >0</div>
+                        <div class="fs-6 " >Total Student</div>
+                        <div >{{$student_count}}</div>
                     </div>
                     <div class="h-100 d-flex align-items-center me-3"><i class="bi bi-person-circle "></i></div>
                 </div>
                 <div class="flex-grow-1  rounded-3 d-flex justify-content-between align-items-center p-2 System-color"  style="font-size: 50px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
                     <div class="d-flex flex-column ms-3 h-100">
-                        <div class="fs-6 " >Total Students</div>
-                        <div class=" d-flex align-items-center">0</div>
+                        <div class="fs-6 " >Total Subject</div>
+                        <div class=" d-flex align-items-center">{{$subject_count}}</div>
                     </div>
-                    <div class="me-3"><i class="bi bi-person-circle "></i></div>
+                    <div class="me-3"><i class="bi bi-book "></i></div>
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ class subjectController extends Controller
     public function manageStudent($id)
     {  
         $subject = Subject::find($id);
+
+        if(!$subject)
+            abort(404);
+
         $subject_students = $subject->student()->get();
         $students = Student::all();
         return view('Teacher.Subject.ManageStudent.index', [

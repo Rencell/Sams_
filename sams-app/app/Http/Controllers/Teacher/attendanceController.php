@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
 use Carbon\Carbon;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Attendance;
-use Database\Factories\StudentFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Database\Factories\StudentFactory;
 
 class attendanceController extends Controller
 {
@@ -35,7 +36,9 @@ class attendanceController extends Controller
      */
     public function manageSubject($attendanceId){
 
-        
+        $isAttendanceExists = Attendance::find($attendanceId)   ;
+        if(!$isAttendanceExists)
+            abort(404); 
         // 1. Present students
         $studentViews = Attendance::find($attendanceId)->student;
         // 2. Id of present students

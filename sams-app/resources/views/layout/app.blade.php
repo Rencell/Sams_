@@ -50,6 +50,7 @@
     <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
     <script src="{{ asset('js/updateModal.js') }}"></script>
     <script src="{{ asset('js/createModal.js') }}"></script>
+    <script src="{{ asset('js/customDataTable.js') }}"></script>
     @stack('script')
 
 

@@ -1,19 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\rfidController;
-use App\Http\Controllers\adminController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\profileController;
-use App\Http\Controllers\studentController;
-use App\Http\Controllers\subjectController;
-use App\Http\Controllers\attendanceController;
-use App\Http\Controllers\navigationController;
+
+use App\Http\Controllers\Teacher\rfidController;
+use App\Http\Controllers\Teacher\adminController;
+use App\Http\Controllers\Teacher\profileController;
+use App\Http\Controllers\Teacher\studentController;
+use App\Http\Controllers\Teacher\subjectController;
+use App\Http\Controllers\Teacher\attendanceController;
+use App\Http\Controllers\Teacher\dashboardController;
 use App\Http\Controllers\admin\admin_studentController;
 use App\Http\Controllers\admin\admin_teacherController;
 use App\Http\Controllers\admin\admin_adminController;
 
-Route::get('/', function () {})->middleware('auth');
+Route::get('/', function () {
+    return view('index');
+});
 Route::get('/admin', function () {})->middleware('auth')->middleware('isAdmin');
 
 Route::controller(loginController::class)->group(function () {
@@ -24,16 +27,10 @@ Route::controller(loginController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [navigationController::class, 'Dashboard']);
-    //Route::get('/student', [navigationController::class, 'Student']);
-   
-    //Route::get('/rfid', [navigationController::class, 'RFID']);
-    Route::get('/setting', [navigationController::class, 'Setting']);
-    //Route::get('/attendance', [navigationController::class, 'Attendance']);
+    Route::get('/dashboard', [dashboardController::class, 'index']);
 });
 
 
-// Teacher view
 
 Route::controller(studentController::class)->middleware('auth')->group(function () {
     Route::get('student', 'index')->name('student.index');

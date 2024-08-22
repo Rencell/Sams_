@@ -5,15 +5,15 @@
         <div class="container-fluid mt-4">
             <div class="row">
                 <div class="col-12">
-                    <div class="card shadow m-3 p-2 mb-5">
+                    <div class="card shadow m-3  mb-5">
                         <div class="card-header text-bold d-flex justify-content-between">
                             All Students
                             <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#selectStudentModal">+ Add</button>
                         </div>
-                        <table class="table">
+                        <table id="table" class="table">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Student No.</th>
+                                    <th scope="col" style="text-align: left">Student No.</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Action</th>
@@ -23,7 +23,7 @@
                                 @foreach ($subject_students as $subject_student)
                                     <tr>
 
-                                        <td scope="row">{{ $subject_student->id }}</td>
+                                        <td scope="row" style="text-align: left">{{ $subject_student->id }}</td>
                                         <td scope="row">{{ $subject_student->Fname }}</td>
                                         <td scope="row">{{ $subject_student->Lname }}</td>
                                         <td scope="row"><form method="POST" action="{{ route('subject.deleteStudent',
@@ -43,5 +43,5 @@
                 </div>
             </div>
         </div>
-        @include('Teacher.Subject.ManageStudent.modal-select-student');
+        @include('Teacher.Subject.ManageStudent.modal-select-student')
 </x-layout>

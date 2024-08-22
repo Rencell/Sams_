@@ -1,5 +1,4 @@
-@if(!Auth::guest() && Auth::user()->isAdmin == '0')
-
+@if (!Auth::guest() && Auth::user()->isAdmin == '0')
     <x-nav href="/dashboard" :active="request()->is('dashboard')">
         <i class="fs-4 bi-speedometer2"></i>
         <x-slot name="label">
@@ -34,12 +33,6 @@
             RFID Attendance
         </x-slot>
     </x-nav>
-
-    <x-nav href="/profile" :active="request()->is('profile')">
-        <i class="fs-4 bi-person-circle "></i>
-        <x-slot name="label">
-            Profile
-        </x-slot>
-    </x-nav>
-
 @endif
+
+

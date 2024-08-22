@@ -10,7 +10,7 @@
             {{-- Modal Body --}}
             <div class="modal-body">
                 <form method="POST" action="{{ route('subject.update', $subject->id) }}"
-                    id="updateform_{{ $subject->id }}">
+                    id="updateform_{{ $subject->id }}" autocomplete="off">
                     @csrf
                     @method('PUT')
                     <div class="mb-3 flex-grow-1">

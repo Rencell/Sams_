@@ -35,6 +35,13 @@
     color: white;
     padding: 8px;
 }
+.dt-info,
+.dt-paging,
+.dt-length,
+.dt-search
+ {
+    padding: 0px 20px 0px 20px;
+}
 
 div.dt-container div.dt-paging {
     margin-bottom: 20px;
