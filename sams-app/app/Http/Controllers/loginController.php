@@ -33,14 +33,15 @@ class loginController extends Controller
         $validation = ([
             
             'email' => 'required|email|max:255',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
 
         ]);
 
         $attribute = $request->validate($validation);
         if(!Auth::attempt($attribute)){
              throw ValidationException::withMessages([
-                'email' => 'Sorry, the email doesn\'t match.'
+                'email' => 'Account does not match or exist',       
+                'password' => 'Account does not match or exist'
              ]);
              
         }

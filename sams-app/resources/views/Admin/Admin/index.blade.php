@@ -4,10 +4,10 @@
             <div class="fs-3">Admins</div>
             <i class="bi-shield-lock" style="font-size: 5rem"></i>
         </div>
-        <div class="col-3 p-4 d-flex flex-column justify-content-between">
+        <div class="col-auto p-4 d-flex flex-column justify-content-between">
             <div>
-                <div class="fs-3 text-end">11:40PM</div>
-                <div class="fs-3 text-end">Monday 05, 2024</div>
+                <div class="fs-3 text-end" id="current_time">11:40PM</div>
+                <div class="fs-3 text-end" id="current_date">Monday 05, 2024</div>
             </div>
             <div>
                 <div class="float-end">

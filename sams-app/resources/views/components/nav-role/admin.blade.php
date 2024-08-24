@@ -1,4 +1,5 @@
 @if(!Auth::guest() && in_array(Auth::user()->isAdmin, ['1', '2'] ))
+
     <x-nav href="/admin/student" :active="request()->is('admin/student')">
         <i class="fs-4 bi-people"></i>
         <x-slot name="label">

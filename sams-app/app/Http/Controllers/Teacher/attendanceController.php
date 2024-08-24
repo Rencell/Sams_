@@ -44,7 +44,7 @@ class attendanceController extends Controller
         // 2. Id of present students
         $student_presents = $studentViews->pluck('id');
         // 3. Id of subject
-        $subjectId = Attendance::find($attendanceId)->pluck('subject_id')->first();
+        $subjectId = Attendance::find($attendanceId)->subject_id;
         // 4. Fetch all subject's students id
         $fetch_student = Subject::with('student')->find($subjectId)->student->pluck('id');
         // 5. Subtract the id of present to all student

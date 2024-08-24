@@ -18,6 +18,7 @@ function createModal() {
             });
         },
         error: function (response) {
+            console.log(response)
             $(".form-control").removeClass("is-invalid");
             var errors = response.responseJSON.errors;
 

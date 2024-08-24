@@ -42,7 +42,7 @@ Route::controller(studentController::class)->middleware('auth')->group(function 
 
 Route::controller(subjectController::class)->middleware('auth')->group(function () {
     Route::get('subject', 'index')->name('subject.index');
-    Route::get('subject/{id}', 'manageStudent')->name('subject.manageStudent');
+    Route::get('subject/{id}', 'show')->name('subject.manageStudent');
     Route::post('subject/archive', 'archive')->name('subject.archive');
     Route::post('subject/{id}', 'storeStudent')->name('subject.studentstore');
     Route::post('subject', 'store')->name('subject.store');

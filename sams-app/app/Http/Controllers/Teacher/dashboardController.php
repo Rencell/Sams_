@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class dashboardController extends Controller
 {
     public function index(){
-        $user = Auth::user()->name;
+        $user = Auth::user()->fname;
 
         $student_count = Student::all()->count();
         $subject_count = Subject::all()->whereIn('teacher_id', Auth::user()->id)->count();

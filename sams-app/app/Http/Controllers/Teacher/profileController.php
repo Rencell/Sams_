@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Teacher;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -78,6 +77,11 @@ class profileController extends Controller
     }
 
     public function updatePass(Request $request){
+
+        if(!Hash::check($request->old_password, Auth::user()->password)){
+            return back()->withErrors(['old_password' => 'The current password is incorrect.']);
+        }
+
         $request->validate([
             'old_password' => ['required', 'max:255'],
             'new_password' => [
@@ -85,16 +89,14 @@ class profileController extends Controller
                 'min:8', 
                 'max:255', 
             ],
-            'confirm_password' => 'required|same:newpassword',
+            'confirm_password' => 'required|same:new_password',
         ]);
-
-        if(!Hash::check($request->oldpassword, Auth::user()->password)){
-            return back()->withErrors(['oldpassword' => 'The current password is incorrect.']);
-        }
+        
+        
 
         $user = Auth::user();
-        $user->password = Hash::make($request->confirmpassword);
-        $user->save();
+        $user->password = Hash::make($request->confirm_password);
+        $user->update();
 
         return redirect()->back();
     }

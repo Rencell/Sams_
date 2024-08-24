@@ -49,7 +49,7 @@ class admin_teacherController extends Controller
             'fname'             =>  $request->fname,
             'lname'             =>  $request->lname,
             'gender'            =>  $request->gender,
-            'email'             =>  $request->s_email,
+            'email'             =>  $request->email,
             'email_verified_at' =>  now(),
             'birth'             =>  $request->birth,
             'password'          =>  Hash::make($request->confirm_password),

@@ -24,21 +24,7 @@ class subjectController extends Controller
         return view('Teacher.Subject.index', compact('Subjects', 'ArchivedSubjects'));
     }
 
-    public function manageStudent($id)
-    {  
-        $subject = Subject::find($id);
-
-        if(!$subject)
-            abort(404);
-
-        $subject_students = $subject->student()->get();
-        $students = Student::all();
-        return view('Teacher.Subject.ManageStudent.index', [
-            'subject_students'  => $subject_students,
-            'students'          => $students,
-            'id'                => $id
-        ]);
-    }
+  
 
     public function storeStudent(Request $request, $id){
         
@@ -91,7 +77,19 @@ class subjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $subject = Subject::find($id);
+
+
+        if(!$subject)
+            abort(404);
+
+        $subject_students = $subject->student()->get();
+        $students = Student::all();
+        return view('Teacher.Subject.ManageStudent.index', [
+            'subject_students'  => $subject_students,
+            'students'          => $students,
+            'id'                => $id
+        ]);
     }
 
     /**

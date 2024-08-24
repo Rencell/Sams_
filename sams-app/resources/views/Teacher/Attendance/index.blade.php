@@ -7,8 +7,8 @@
         </div>
         <div class="col-3 p-4 d-flex flex-column justify-content-between">
             <div>
-                <div class="fs-3 text-end">11:40PM</div>
-                <div class="fs-3 text-end">Monday 05, 2024</div>
+                <div class="fs-3 text-end" id="current_time">11:40PM</div>
+                <div class="fs-3 text-end" id="current_date">Monday 05, 2024</div>
             </div>
             <div>
                 <button class="btn btn-dark float-end"  data-bs-toggle="modal" data-bs-target="#archivemodal"><i class="bi bi-archive" ></i></button>

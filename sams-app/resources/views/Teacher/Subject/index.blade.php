@@ -7,8 +7,8 @@
         </div>
         <div class="col-3 p-4 d-flex flex-column justify-content-between">
             <div>
-                <div class="fs-3 text-end">11:40PM</div>
-                <div class="fs-3 text-end">Monday 05, 2024</div>
+                <div class="fs-3 text-end" id="current_time"> </div>
+                <div class="fs-3 text-end" id="current_date"></div>
             </div>
             <div>
                 <div class="float-end">

@@ -51,7 +51,8 @@
                             <label for="gender" class="form-label fs-6 fw-light m-0">
                                 <h5>Gender</h5>
                             </label>
-                            <select class="form-select" style="line-height: 2.0" id="gender" aria-label="Default select example" name="gender">
+                            <select class="form-select" style="line-height: 2.0" id="gender"
+                                aria-label="Default select example" name="gender">
                                 <option selected>{{ $profile->gender }}</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -62,7 +63,9 @@
 
 
                     <div class="mb-3 col-md-6 col-sm-12 p-0 gap-2">
-                        <label for="email" class="form-label fw-light m-0"><h5>Email:</h5> </label>
+                        <label for="email" class="form-label fw-light m-0">
+                            <h5>Email:</h5>
+                        </label>
                         <input type="text" class="form-control" id="email" name="email"
                             value="{{ $profile->email }}">
                         @error('email')
@@ -71,7 +74,7 @@
                             </h5>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary saved">Save</button>
                 </div>
             </form>
         </div>
@@ -84,7 +87,9 @@
                     <div class="mb-3" style="color: rgb(136, 152, 170); font-size: 0.8em">Keep your account safe by
                         updating your password. Make sure to choose a strong and unique password.</div>
                     <div class="mb-3 col-md-6 col-sm-12 p-0">
-                        <label for="oldpassword" class="form-label fs-6 fw-light m-0"><h5>Current Password:</h5> </label>
+                        <label for="oldpassword" class="form-label fs-6 fw-light m-0">
+                            <h5>Current Password:</h5>
+                        </label>
                         <input type="password" class="form-control" id="oldpassword" name="old_password"
                             value="{{ old('old_password') }}">
                         @error('old_password')
@@ -94,7 +99,9 @@
                         @enderror
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12 p-0">
-                        <label for="newpassword" class="form-label fw-light m-0"><h5>New Password: </h5></label>
+                        <label for="newpassword" class="form-label fw-light m-0">
+                            <h5>New Password: </h5>
+                        </label>
                         <input type="password" class="form-control" id="newpassword" name="new_password">
                         @error('new_password')
                             <h5 class="text-danger">
@@ -102,8 +109,10 @@
                             </h5>
                         @enderror
                     </div>
-                    <div class="mb-3 col-md-6 col-sm-12 p-0" >
-                        <label for="confirmpassword" class="form-label fw-light m-0"><h5>Confirm Password: </h5></label>
+                    <div class="mb-3 col-md-6 col-sm-12 p-0">
+                        <label for="confirmpassword" class="form-label fw-light m-0">
+                            <h5>Confirm Password: </h5>
+                        </label>
                         <input type="password" class="form-control" id="confirmpassword" name="confirm_password">
                         @error('confirm_password')
                             <h5 class="text-danger">
@@ -116,4 +125,26 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+
+
+            $('.saved').on('click', function(e) {
+                e.preventDefault();
+                swal({
+                        title: "Good job!",
+                        text: "You successfully updated your profile",
+                        icon: "success"
+                    })
+                    .then(() => {
+                        this.closest('form').submit();
+                    });
+            });
+
+
+
+        });
+    </script>
 </x-layout>

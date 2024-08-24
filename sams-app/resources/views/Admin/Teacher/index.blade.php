@@ -4,14 +4,15 @@
             <div class="fs-3">Teachers</div>
             <i class="bi-person-badge" style="font-size: 5rem"></i>
         </div>
-        <div class="col-3 p-4 d-flex flex-column justify-content-between">
+        <div class="col-auto p-4 d-flex flex-column justify-content-between">
             <div>
-                <div class="fs-3 text-end">11:40PM</div>
-                <div class="fs-3 text-end">Monday 05, 2024</div>
+                <div class="fs-3 text-end" id="current_time">11:40PM</div>
+                <div class="fs-3 text-end" id="current_date">Monday 05, 2024</div>
             </div>
             <div>
                 <div class="float-end">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#createModal">+
                         Create</button>
                     <button class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#archivemodal"><i
                             class="bi bi-archive"></i></button>
@@ -51,10 +52,12 @@
                                             @include('Admin.Teacher.Modal.update-modal', [
                                                 'Teacher' => $teacher,
                                             ])
-                                            <form method="POST" action="{{ route('admin-teacher.destroy', $teacher->id) }}">
+                                            <form method="POST"
+                                                action="{{ route('admin-teacher.destroy', $teacher->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="buttton" class="btn bg-danger btn-sm" onclick="deleteConfirmation(event, this)"><i
+                                                <button type="buttton" class="btn bg-danger btn-sm"
+                                                    onclick="deleteConfirmation(event, this)"><i
                                                         class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </div>

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="{{asset('images/rfid.png')}}" type="image/x-icon">
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -51,6 +52,7 @@
     <script src="{{ asset('js/updateModal.js') }}"></script>
     <script src="{{ asset('js/createModal.js') }}"></script>
     <script src="{{ asset('js/customDataTable.js') }}"></script>
+    <script src="{{ asset('js/currentDate.js') }}"></script>
     @stack('script')
 
 

@@ -62,19 +62,19 @@
 
                     <div class="mb-3 flex-grow-1">
                         <label for="password" class="form-label">Password </label>
-                        <input type="text" class="form-control" id="password_create" aria-describedby="emailHelp"
+                        <input type="password" class="form-control" id="password_create" aria-describedby="emailHelp"
                             name="password">
                         <h5 class="invalid-feedback"></h5>
                     </div>
                     <div class="mb-3 flex-grow-1">
                         <label for="confirm_password" class="form-label">Confirm Password: </label>
-                        <input type="text" class="form-control" id="confirm_password_create" aria-describedby="emailHelp"
+                        <input type="password" class="form-control" id="confirm_password_create" aria-describedby="emailHelp"
                             name="confirm_password">
                         <h5 class="invalid-feedback"></h5>
                     </div>
 
                 </form>
-            </div>
+            </div>  
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Close</button>
 
