@@ -98,7 +98,7 @@ class profileController extends Controller
         $user->password = Hash::make($request->confirm_password);
         $user->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Your password has been saved successfully.');
     }
 
     /**

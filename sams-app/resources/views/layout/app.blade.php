@@ -53,6 +53,7 @@
     <script src="{{ asset('js/createModal.js') }}"></script>
     <script src="{{ asset('js/customDataTable.js') }}"></script>
     <script src="{{ asset('js/currentDate.js') }}"></script>
+    <script src="{{ asset('js/successSweetAlert.js') }}"></script>
     @stack('script')
 
 

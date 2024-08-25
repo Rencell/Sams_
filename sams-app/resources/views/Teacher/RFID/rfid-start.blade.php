@@ -144,6 +144,8 @@
                 });
         }
         $(document).ready(function() {
+            var today = new Date().toISOString().split('T')[0];
+            $('#dated').val(today);
             scan_text = '';
             $(document).on('keydown', function(e) {
                 if (e.key === 'Enter') {
@@ -167,6 +169,7 @@
                         '_token': '{{ csrf_token() }}'
                     },
                     success: function(success) {
+                        $('#dated').val(today);
                         $('#Alert').show();
                         alert = Object.keys(success)[0];
                         message = Object.values(success)[0];
@@ -180,17 +183,14 @@
                             $('#Alert').removeClass();
                             $('#Alert').addClass('alert');
                             $('.form-control').val('');
+                            $('#dated').val(today);
                         }, 2000);
                     },
                     error: function(error) {
                         console.log(error);
-
                     }
                 });
             }
-
-            var today = new Date().toISOString().split('T')[0];
-            $('#dated').val(today);
 
         });
     </script>

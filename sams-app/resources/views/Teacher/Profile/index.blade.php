@@ -74,15 +74,22 @@
                             </h5>
                         @enderror
                     </div>
-                    <button type="button" class="btn btn-primary saved">Save</button>
+                    <button type="button" class="btn btn-primary profileupdate">Save</button>
                 </div>
             </form>
         </div>
 
         <div class="row p-3 pb-5">
+
+
             <form method="POST" action="{{ route('profile.updatePassword') }}">
                 @csrf
                 <div class="col-12 rounded-2  bg-white shadow p-4">
+                    @if (session('success'))
+                        <h5 class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </h5>
+                    @endif
                     <div class="text-bold fs-5 mb-2">Update Password</div>
                     <div class="mb-3" style="color: rgb(136, 152, 170); font-size: 0.8em">Keep your account safe by
                         updating your password. Make sure to choose a strong and unique password.</div>
@@ -131,7 +138,7 @@
         $(document).ready(function() {
 
 
-            $('.saved').on('click', function(e) {
+            $('.profileupdate').on('click', function(e) {
                 e.preventDefault();
                 swal({
                         title: "Good job!",

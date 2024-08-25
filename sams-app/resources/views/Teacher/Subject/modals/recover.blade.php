@@ -8,7 +8,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('subject.archive') }}" id="subjectrecover">
+                <form method="POST" class="archivedform" action="{{ route('subject.archive') }}" id="subjectrecover">
                     @csrf
 
                     <table class="table" id="example">
@@ -33,12 +33,11 @@
 
                         </tbody>
                     </table>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Close</button>
 
-                <button type="submit" class="btn btn-danger">Recover</button>
+                <button type="button" class="btn btn-danger saved">Recover</button>
 
             </div>
             </form>

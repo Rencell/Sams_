@@ -8,7 +8,7 @@
             </div>
             {{-- Modal Body --}}
             <div class="modal-body">
-                <form method="POST" action="{{ route('attendance.archive') }}" id="attendancerecover">
+                <form method="POST" class="archivedform" action="{{ route('attendance.archive') }}" id="attendancerecover">
                     @csrf
 
                     <table class="table" id="example">
