@@ -60,10 +60,13 @@ class profileController extends Controller
         
         $user = Auth::user();
         $request->validate([
-            'First_name'          => 'required|max:255',
-            'Last_name'          => 'required|max:255',
-            'birth_date'          => 'required|date',
-            'email'   => 'required|max:255|email', Rule::unique('users', 'email')->ignore($user->id)
+            'First_name'        => 'required|max:255',
+            'Last_name'         => 'required|max:255',
+            'birth_date'        => 'required|date',
+            'email'             => ['required', 
+                                    'max:255', 
+                                    'email', 
+                                    Rule::unique('users', 'email')->ignore($user->id)],
         ]);
 
         $user->fname = $request->First_name;
@@ -73,7 +76,7 @@ class profileController extends Controller
         $user->gender = $request->gender;
         $user->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('success-profile', 'Your profile has been updated successfully.');
     }
 
     public function updatePass(Request $request){
@@ -98,7 +101,7 @@ class profileController extends Controller
         $user->password = Hash::make($request->confirm_password);
         $user->update();
 
-        return redirect()->back()->with('success', 'Your password has been saved successfully.');
+        return redirect()->back()->with('success-password', 'Your password has been saved successfully.');
     }
 
     /**

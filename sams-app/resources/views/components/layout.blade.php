@@ -12,8 +12,10 @@
                         @if (!Auth::guest())
                             @if (Auth::user()->isAdmin == '0')
                                 <span class="fs-6 mt-3 d-none d-sm-inline">Student Attendance Management System</span>
-                            @else
+                            @elseif(Auth::user()->isAdmin == '1')
                                 <span class="fs-6 mt-3 d-none d-sm-inline">Admin</span>
+                            @else
+                                <span class="fs-6 mt-3 d-none d-sm-inline">Superadmin</span>
                             @endif
                         @endif
 

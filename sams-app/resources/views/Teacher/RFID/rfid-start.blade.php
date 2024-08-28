@@ -105,7 +105,7 @@
     <div class="cvsu">
 
         <div class="photo">
-            <img src="https://cvsu-rosario.edu.ph/CVSU_Portal/images/logo.png" alt="Photo">
+            <img src="{{asset('images/logo.png')}}" alt="Photo">
         </div>
         <div class="form-group">
             <div>

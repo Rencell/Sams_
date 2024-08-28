@@ -3,7 +3,13 @@
         <div class="row  p-4">
             <form method="POST" action="{{ route('profile.updateProfile') }}">
                 @csrf
+
                 <div class="col-md-12 bg-white shadow rounded-2 p-4">
+                    @if (session('success-profile'))
+                        <h5 class="alert alert-success" role="alert">
+                            {{ session('success-profile') }}
+                        </h5>
+                    @endif
                     <div class="text-bold fs-5 mb-2">Profile Information</div>
                     <div class="mb-3" style="color: rgb(136, 152, 170); font-size: 0.8em">update your account's profile
                         information and email address.</div>
@@ -74,7 +80,7 @@
                             </h5>
                         @enderror
                     </div>
-                    <button type="button" class="btn btn-primary profileupdate">Save</button>
+                    <button type="submit" class="btn btn-primary ">Save</button>
                 </div>
             </form>
         </div>
@@ -85,9 +91,9 @@
             <form method="POST" action="{{ route('profile.updatePassword') }}">
                 @csrf
                 <div class="col-12 rounded-2  bg-white shadow p-4">
-                    @if (session('success'))
+                    @if (session('success-password'))
                         <h5 class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                            {{ session('success-password') }}
                         </h5>
                     @endif
                     <div class="text-bold fs-5 mb-2">Update Password</div>
@@ -135,23 +141,6 @@
 
 
     <script>
-        $(document).ready(function() {
-
-
-            $('.profileupdate').on('click', function(e) {
-                e.preventDefault();
-                swal({
-                        title: "Good job!",
-                        text: "You successfully updated your profile",
-                        icon: "success"
-                    })
-                    .then(() => {
-                        this.closest('form').submit();
-                    });
-            });
-
-
-
-        });
+       
     </script>
 </x-layout>

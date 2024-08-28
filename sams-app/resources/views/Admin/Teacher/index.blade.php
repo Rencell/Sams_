@@ -28,7 +28,7 @@
                     <div class="card-header text-bold">
                         All Teachers
                     </div>
-                    <table id="exampletable" class="table display nowrap" style="width:100%">
+                    <table id="table" class="table display nowrap" style="width:100%">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col" style="text-align: left">id</th>

@@ -9,7 +9,7 @@
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 mt-auto mb-auto">
 
                
-                <div class="card shadow-lg">
+                <div class="card" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
                     <div class="card-body p-5">
                         
                         <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>

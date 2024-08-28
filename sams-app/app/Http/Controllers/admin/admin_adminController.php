@@ -16,7 +16,7 @@ class admin_adminController extends Controller
     public function index()
     {
 
-        $admins = User::get()->whereIn('isAdmin', ['1','2']);
+        $admins = User::get()->whereIn('isAdmin', '1');
         $archivedAdmins = User::onlyTrashed()->get()->whereIn('isAdmin', '1');
        // $archivedStudents = User::onlyTrashed()->get();
 
